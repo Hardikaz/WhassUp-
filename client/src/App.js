@@ -1,74 +1,18 @@
 import './App.css';
+import Header from './Header'
+import Layout from './Layout'
+import Post from './Post'
+import {Route,Routes} from "react-router-dom"
 
 function App() {
   return (
-   <main>
-    <header>
-      <a href="" className="logo">MyBlog</a>
-      <nav>
-        <a href="">Login</a>
-        <a href="">Register</a>
-      </nav>
-    </header>
-
-    <div className="post">
-    <div className='image'>
-    <img src='https://media.istockphoto.com/id/843408508/photo/photography-camera-lens-concept.jpg?s=612x612&w=0&k=20&c=-tm5TKrPDMakrT1vcOE-4Rlyj-iBVdzKuX4viFkd7Vo='/>
-    </div>
-    
-    <div className="text">
-    <h2>Full house battery coming later this year</h2>
-    <p className='info'>
-     <a className='author'>Vladimir Hardik</a>
-     <time>2024-01-06 16:45</time>
-    </p>
-    <p className='summary'>Lorem ipsum sit amet Full house battery coming later this year</p>
-    </div>
-    </div>
-
-    <div className="post">
-    <div className='image'>
-    <img src='https://media.istockphoto.com/id/843408508/photo/photography-camera-lens-concept.jpg?s=612x612&w=0&k=20&c=-tm5TKrPDMakrT1vcOE-4Rlyj-iBVdzKuX4viFkd7Vo='/>
-    </div>
-    <div className="text">
-    <h2>Full house battery coming later this year</h2>
-    <p className='info'>
-     <a className='author'>Vladimir Hardik</a>
-     <time>2024-01-06 16:45</time>
-    </p>
-    <p className='summary'>Lorem ipsum sit amet Full house battery coming later this year</p>
-    </div>
-    </div>
-
-    <div className="post">
-    <div className='image'>
-    <img src='https://media.istockphoto.com/id/843408508/photo/photography-camera-lens-concept.jpg?s=612x612&w=0&k=20&c=-tm5TKrPDMakrT1vcOE-4Rlyj-iBVdzKuX4viFkd7Vo='/>
-    </div>
-    <div className="text">
-    <h2>Full house battery coming later this year</h2>
-    <p className='info'>
-     <a className='author'>Vladimir Hardik</a>
-     <time>2024-01-06 16:45</time>
-    </p>
-    <p className='summary'>Lorem ipsum sit amet Full house battery coming later this year</p>
-    </div>
-    </div>
-
-    <div className="post">
-    <div className='image'>
-    <img src='https://media.istockphoto.com/id/843408508/photo/photography-camera-lens-concept.jpg?s=612x612&w=0&k=20&c=-tm5TKrPDMakrT1vcOE-4Rlyj-iBVdzKuX4viFkd7Vo='/>
-    </div>
-    <div className="text">
-    <h2>Full house battery coming later this year</h2>
-    <p className='info'>
-     <a className='author'>Vladimir Hardik</a>
-     <time>2024-01-06 16:45</time>
-    </p>
-    <p className='summary'>Lorem ipsum sit amet Full house battery coming later this year</p>
-    </div>
-    </div>
-
-   </main>
+    <Routes>
+     <Route path="/" element={<Layout/>}>
+     <Route index element={<Post/>}/>
+     <Route path={'/login'} element={<div>Login page</div>}/>
+     </Route>
+    </Routes>
+   
   );
 }
 
