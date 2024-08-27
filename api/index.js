@@ -3,6 +3,7 @@ const cors=require('cors')
 const mongoose=require('mongoose')
 const User=require('./models/User')
 const bcrypt=require('bcrypt')
+const jwt=require('jsonwebtoken')
 const app=express();
 
 app.use(cors());
@@ -26,10 +27,19 @@ app.post('/register',async (req,res)=>{
 });
 
 app.post('/login',async (req,res)=>{
- const {username,password}=req.body;
- const userDoc=await User.findOne({username});
- res.json(userDoc);
-});
+        const {username,password}=req.body;
+        //  const existingUser=await User.findOne({username})
+        //  const matchpassword=await bcrypt.compare(password,existingUser.password)
+            
+            // if(matchpassword===true) alert("User found")
+            // else 
+            // alert("User not found")
+        
+         const userDoc=await User.findOne({username});
+         const hashedpassword=await bcrypt.compare(password,userDoc.password);
+
+         res.json(hashedpassword);
+ });
 
 app.listen(4000);
 
