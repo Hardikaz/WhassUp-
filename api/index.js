@@ -4,10 +4,12 @@ const mongoose=require('mongoose')
 const User=require('./models/User')
 const bcrypt=require('bcrypt')
 const jwt=require('jsonwebtoken')
+const cookieParser=require('cookie-parser');
 const app=express();
 
 app.use(cors({credentials:true,origin:'http://localhost:3000'}));
 app.use(express.json());
+app.use(cookieParser());
 
 //mongoose.connect('mongodb+srv://sharmahardikaz:UHpvW12zO3eOpFDV@cluster0.gyfza.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
 mongoose.connect('mongodb://localhost:27017/BlogSpot');
@@ -45,7 +47,10 @@ app.post('/login',async (req,res)=>{
             jwt.sign({username,id:userDoc._id},secret,{},(err,token)=>
             {
                if(err) throw err;
-                res.cookie('token',token).json('ok');
+                res.cookie('token',token).json({
+                    id:userDoc._id,
+                    username,
+                });
             });
          }
          else {
@@ -53,6 +58,19 @@ app.post('/login',async (req,res)=>{
          }
         //  res.json(hashedpassword);
  });
+
+app.get('/profile',(req,res)=>{
+    const {token}=req.cookies;
+    jwt.verify(token,secret,{},(err,info)=>{
+        if(err) throw err;
+        res.json(info);
+    });
+    // res.json(req.cookies);
+});
+
+app.post('/logout',(req,res)=>{
+    res.cookie('token','').json('ok');
+})
 
 app.listen(4000);
 
