@@ -91,7 +91,7 @@ app.post('/post',uploadMiddleware.single('file'),async (req,res)=>{
         cover:newPath,
     });
 
-    res.json(postDoc);
+    res.json({postDoc});
 })
 
 

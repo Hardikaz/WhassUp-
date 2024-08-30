@@ -43,14 +43,14 @@ export default function CreatePost()
         credentials:'include',
     });
     
-    await response.json();
-    // if(response.ok){
-    //     setRedirect(true);
+    // await response.json();
+    if(response.ok){
+        setRedirect(true);
     }
+  }
+  if(redirect)
+    return <Navigate to={'/'}/>
  
-//   if(redirect)
-//     return <Navigate to={'/'}/>
-
     return (
          <form onSubmit={createNewPost}>
             
