@@ -14,6 +14,7 @@ const app=express();
 app.use(cors({credentials:true,origin:'http://localhost:3000'}));
 app.use(express.json());
 app.use(cookieParser());
+app.use('/uploads',express.static(__dirname+'/uploads'));
 
 //mongoose.connect('mongodb+srv://sharmahardikaz:UHpvW12zO3eOpFDV@cluster0.gyfza.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
 mongoose.connect('mongodb://localhost:27017/BlogSpot');
@@ -104,6 +105,13 @@ app.get('/post',async(req,res)=>{
     .populate('author', ['username'])
     .sort({createdAt: -1}).limit(20));
 })
+
+app.get('/post/:id',async (req,res)=>{
+    const {id}=req.params;
+    const postDoc=await Post.findById(id).populate('author',['username']);
+    res.json(postDoc);
+})
+
 app.listen(4000);
 
 // MongoDb username:sharmahardikaz
